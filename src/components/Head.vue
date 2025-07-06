@@ -1,24 +1,40 @@
 <script setup>
 import { ref, watch } from "vue";
+import { useFilterArrayStore } from "../api/useFileterArrayStore";
 
 const inpNameTodo = ref("");
 const toDoList = defineModel("toDoList");
-const activeOption = ref("");
+const activeOption = ref("All");
 const todoElements = ref([]);
+const filteredArray = useFilterArrayStore();
 
 function addToDo() {
   const trimmed = inpNameTodo.value.trim();
   if (!trimmed) return;
+  const newTask = {
+    id: Date.now(),
+    name: inpNameTodo.value,
+  };
+  if (activeOption.value !== "Done") {
+    todoElements.value.push(newTask);
 
-  todoElements.value.push(inpNameTodo.value);
-  inpNameTodo.value = "";
-  toDoList.value = todoElements.value;
+    filteredArray.addToArrayAll(newTask);
+    filteredArray.addToArrayNotDone(newTask);
+    inpNameTodo.value = "";
+    toDoList.value = todoElements.value;
+  } else {
+    toDoList.value = filteredArray.getArrayDone;
+    inpNameTodo.value = "";
+  }
 }
 
 watch(activeOption, (newVal) => {
   if (newVal === "Done") {
+    toDoList.value = filteredArray.getArrayDone();
   } else if (newVal === "Not done") {
+    toDoList.value = filteredArray.getArrayNotDone();
   } else {
+    toDoList.value = filteredArray.getArrayAll();
   }
 });
 </script>
