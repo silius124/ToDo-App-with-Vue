@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const inpNameTodo = ref("");
 const toDoList = defineModel("toDoList");
+const activeOption = ref("");
 const todoElements = ref([]);
 
 function addToDo() {
@@ -13,6 +14,13 @@ function addToDo() {
   inpNameTodo.value = "";
   toDoList.value = todoElements.value;
 }
+
+watch(activeOption, (newVal) => {
+  if (newVal === "Done") {
+  } else if (newVal === "Not done") {
+  } else {
+  }
+});
 </script>
 <template>
   <div class="flex gap-3 items-center justify-center mb-10 mt-5">
@@ -22,14 +30,17 @@ function addToDo() {
       v-model="inpNameTodo"
     />
     <select
-      class="w-32 bg-purple-500 p-2 rounded-sm text-white shadow-lg"
+      class="w-32 bg-purple-500 p-2 rounded-sm text-white shadow-lg cursor-pointer focus:outline-transparent"
       name=""
       id=""
+      v-model="activeOption"
     >
-      <option class="text-white" value="">All</option>
+      <option class="hover:bg-purple-700">All</option>
+      <option class="hover:bg-purple-700">Done</option>
+      <option class="hover:bg-purple-700">Not done</option>
     </select>
     <button
-      class="bg-purple-500 rounded-xl p-2 w-3xs text-white shadow-lg transtition-bg duration-200 hover:bg-purple-700 transition-scale duration-100 scale-100 active:scale-98"
+      class="bg-purple-500 rounded-xl p-2 w-3xs text-white cursor-pointer shadow-lg transtition-bg duration-200 hover:bg-purple-700 transition-scale duration-100 scale-100 active:scale-98"
       @click="addToDo"
     >
       Добавить

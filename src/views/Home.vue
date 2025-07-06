@@ -1,7 +1,7 @@
 <script setup>
 import Head from "../components/Head.vue";
 import ToDoList from "../components/ToDoList.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const toDoList = ref();
 </script>
