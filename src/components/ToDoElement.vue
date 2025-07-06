@@ -3,7 +3,7 @@ const nameTodo = defineModel("nameTodo");
 const todoNum = defineModel("todoNum");
 </script>
 <template>
-  <div class="border-b-2 border-gray-100 w-200 flex items-center gap-4 p-4">
+  <div class="border-b-2 border-gray-100 w-300 flex items-center gap-4 p-4">
     <input
       type="checkbox"
       class="size-7 accent-purple-500"
@@ -13,5 +13,15 @@ const todoNum = defineModel("todoNum");
     <label :for="'todo-' + todoNum" class="text-3xl w-full text-start">{{
       nameTodo
     }}</label>
+    <button
+      class="size-15 bg-red-500 rounded-xl text-white text-xl duration-200 hover:w-30 cursor-pointer"
+    >
+      Уд
+    </button>
+    <button
+      class="size-15 bg-blue-500 rounded-xl text-white text-xl duration-200 hover:w-30 cursor-pointer"
+    >
+      Ред
+    </button>
   </div>
 </template>
