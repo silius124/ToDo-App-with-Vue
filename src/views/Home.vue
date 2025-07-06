@@ -7,8 +7,8 @@ const toDoList = ref();
 </script>
 
 <template>
-  <div>
-    <div>TODO List</div>
+  <div class="mx-w-7xl flex flex-column item-center justify-center">
+    <div class="text-center">TODO List</div>
     <div>
       <Head v-model:toDoList="toDoList" />
       <ToDoList v-model:toDoList="toDoList" />

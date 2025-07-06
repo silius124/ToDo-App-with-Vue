@@ -6,7 +6,7 @@ const toDoList = defineModel("toDoList");
 <template>
   <ul id="listToDo">
     <li v-for="(todoElement, index) of toDoList" :key="index" class>
-      <ToDoElement :nameTodo="todoElement" />
+      <ToDoElement :nameTodo="todoElement" :todoNum="index" />
     </li>
   </ul>
 </template>

@@ -17,7 +17,7 @@ function addToDo() {
 <template>
   <div class="flex gap-3 items-center justify-center mb-10 mt-5">
     <input
-      class="basis-1/3 border-2 rounded-md border-purple-500 p-1 focus:border-purple-850 focus:border-3 focus:outline-0 shadow-lg"
+      class="w-150 border-2 rounded-md border-purple-500 p-1 focus:border-purple-850 focus:border-3 focus:outline-0 shadow-lg"
       type="text"
       v-model="inpNameTodo"
     />
