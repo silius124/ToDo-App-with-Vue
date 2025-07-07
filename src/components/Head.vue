@@ -4,7 +4,8 @@ import { useFilterArrayStore } from "../api/useFileterArrayStore";
 
 const inpNameTodo = ref("");
 const toDoList = defineModel("toDoList");
-const activeOption = ref("All");
+const activeOption = defineModel("filter");
+activeOption.value = "All";
 const todoElements = ref([]);
 const filteredArray = useFilterArrayStore();
 
@@ -15,17 +16,9 @@ function addToDo() {
     id: Date.now(),
     name: inpNameTodo.value,
   };
-  if (activeOption.value !== "Done") {
-    todoElements.value.push(newTask);
-
-    filteredArray.addToArrayAll(newTask);
-    filteredArray.addToArrayNotDone(newTask);
-    inpNameTodo.value = "";
-    toDoList.value = todoElements.value;
-  } else {
-    toDoList.value = filteredArray.getArrayDone;
-    inpNameTodo.value = "";
-  }
+  filteredArray.addToArrayAll(newTask);
+  filteredArray.addToArrayNotDone(newTask);
+  inpNameTodo.value = "";
 }
 
 watch(activeOption, (newVal) => {

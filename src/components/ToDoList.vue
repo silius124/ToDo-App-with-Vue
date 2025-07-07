@@ -5,13 +5,19 @@ import { ref, watch } from "vue";
 const filteredArray = useFilterArrayStore();
 const checkedMap = ref({});
 const todoElement = ref();
-const toDoList = defineModel("toDoList");
+const filter = defineModel("filter");
+const arrayAll = ref([]);
+const arrayDone = ref([]);
+const arrayNotDone = ref([]);
+arrayAll.value = filteredArray.getArrayAll();
+arrayDone.value = filteredArray.getArrayDone();
+arrayNotDone.value = filteredArray.getArrayNotDone();
 
 watch(
   checkedMap,
   () => {
     for (const [key, value] of Object.entries(checkedMap.value)) {
-      const task = toDoList.value.find((t) => t.id == key);
+      const task = arrayAll.value.find((t) => t.id == key);
       if (!task) continue;
       if (value == true) {
         if (!filteredArray.hasInArrayDone(task)) {
@@ -35,9 +41,37 @@ watch(
 );
 </script>
 <template>
-  <ul id="listToDo">
+  <ul id="listToDo" v-if="filter === 'All'">
     <li
-      v-for="todoElement of toDoList"
+      v-for="todoElement of arrayAll"
+      :key="todoElement.id"
+      :value="todoElement.name"
+      class
+    >
+      <ToDoElement
+        :nameTodo="todoElement.name"
+        :todoNum="todoElement.id"
+        v-model:checked="checkedMap[todoElement.id]"
+      />
+    </li>
+  </ul>
+  <ul id="listToDo" v-else-if="filter === 'Done'">
+    <li
+      v-for="todoElement of arrayDone"
+      :key="todoElement.id"
+      :value="todoElement.name"
+      class
+    >
+      <ToDoElement
+        :nameTodo="todoElement.name"
+        :todoNum="todoElement.id"
+        v-model:checked="checkedMap[todoElement.id]"
+      />
+    </li>
+  </ul>
+  <ul id="listToDo" v-else-if="filter === 'Not done'">
+    <li
+      v-for="todoElement of arrayNotDone"
       :key="todoElement.id"
       :value="todoElement.name"
       class

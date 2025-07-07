@@ -34,13 +34,13 @@ export const useFilterArrayStore = defineStore("filterArray", () => {
     return arrayAll.value.includes(item);
   }
   function delFromArrayDone(item) {
-    arrayDone.value.splice(arrayDone.value.indexOf(item), 1);
+    arrayDone.value = arrayDone.value.filter((el) => el.name !== item);
   }
   function delFromArrayNotDone(item) {
-    arrayNotDone.value.splice(arrayNotDone.value.indexOf(item), 1);
+    arrayNotDone.value = arrayNotDone.value.filter((el) => el.name !== item);
   }
   function delFromArrayAll(item) {
-    arrayAll.value.splice(arrayAll.value.indexOf(item), 1);
+    arrayAll.value = arrayAll.value.filter((el) => el.name !== item);
   }
   return {
     arrayAll,

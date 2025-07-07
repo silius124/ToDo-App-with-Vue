@@ -1,15 +1,20 @@
 <script setup>
 import { useFilterArrayStore } from "../api/useFileterArrayStore";
+import { ref } from "vue";
 const nameTodo = defineModel("nameTodo");
 const todoNum = defineModel("todoNum");
 
 const checked = defineModel("checked");
+const isEdit = ref(false);
 
 function deleteTask() {
   const filteredArray = useFilterArrayStore();
   filteredArray.delFromArrayAll(nameTodo.value);
   filteredArray.delFromArrayDone(nameTodo.value);
   filteredArray.delFromArrayNotDone(nameTodo.value);
+}
+function editTask() {
+  isEdit.value = !isEdit.value;
 }
 </script>
 <template>
@@ -21,9 +26,18 @@ function deleteTask() {
       name="todo"
       :id="'todo-' + todoNum"
     />
-    <label :for="'todo-' + todoNum" class="text-3xl w-full text-start">{{
-      nameTodo
-    }}</label>
+    <label
+      v-if="!isEdit"
+      :for="'todo-' + todoNum"
+      class="text-3xl w-full text-start"
+      >{{ nameTodo }}</label
+    >
+    <input
+      v-else
+      type="text"
+      v-model="nameTodo"
+      class="text-3xl w-full text-start"
+    />
     <button
       @click="deleteTask"
       class="size-15 bg-red-500 rounded-xl text-white text-xl duration-200 hover:w-30 cursor-pointer"
@@ -31,6 +45,7 @@ function deleteTask() {
       Уд
     </button>
     <button
+      @click="editTask"
       class="size-15 bg-blue-500 rounded-xl text-white text-xl duration-200 hover:w-30 cursor-pointer"
     >
       Ред
