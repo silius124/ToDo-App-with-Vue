@@ -1,13 +1,12 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useFilterArrayStore } from "../api/useFileterArrayStore";
-
+import { useFilterStore } from "../api/useFilterStore";
 const inpNameTodo = ref("");
-const toDoList = defineModel("toDoList");
-const activeOption = defineModel("filter");
-activeOption.value = "All";
-const todoElements = ref([]);
+const activeOption = ref("All");
 const filteredArray = useFilterArrayStore();
+const filter = useFilterStore();
+filter.filter = activeOption.value;
 
 function addToDo() {
   const trimmed = inpNameTodo.value.trim();
@@ -22,13 +21,7 @@ function addToDo() {
 }
 
 watch(activeOption, (newVal) => {
-  if (newVal === "Done") {
-    toDoList.value = filteredArray.getArrayDone();
-  } else if (newVal === "Not done") {
-    toDoList.value = filteredArray.getArrayNotDone();
-  } else {
-    toDoList.value = filteredArray.getArrayAll();
-  }
+  filter.setFilter(newVal);
 });
 </script>
 <template>

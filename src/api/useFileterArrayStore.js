@@ -25,22 +25,36 @@ export const useFilterArrayStore = defineStore("filterArray", () => {
     return arrayAll.value;
   }
   function hasInArrayDone(item) {
-    return arrayDone.value.includes(item);
+    return arrayDone.value.includes(item.id);
   }
   function hasInArrayNotDone(item) {
-    return arrayNotDone.value.includes(item);
+    return arrayNotDone.value.includes(item.id);
   }
   function hasInArrayAll(item) {
-    return arrayAll.value.includes(item);
+    return arrayAll.value.includes(item.id);
   }
   function delFromArrayDone(item) {
-    arrayDone.value = arrayDone.value.filter((el) => el.name !== item);
+    arrayDone.value.splice(
+      arrayDone.value.findIndex((it) => it.id == item.id),
+      1
+    );
   }
   function delFromArrayNotDone(item) {
-    arrayNotDone.value = arrayNotDone.value.filter((el) => el.name !== item);
+    arrayNotDone.value.splice(
+      arrayNotDone.value.findIndex((it) => it.id == item.id),
+      1
+    );
   }
   function delFromArrayAll(item) {
-    arrayAll.value = arrayAll.value.filter((el) => el.name !== item);
+    arrayAll.value.splice(
+      arrayAll.value.findIndex((it) => it.id == item.id),
+      1
+    );
+  }
+  function delFromAll(item) {
+    delFromArrayAll(item);
+    delFromArrayDone(item);
+    delFromArrayNotDone(item);
   }
   return {
     arrayAll,
@@ -58,5 +72,6 @@ export const useFilterArrayStore = defineStore("filterArray", () => {
     delFromArrayDone,
     delFromArrayNotDone,
     delFromArrayAll,
+    delFromAll,
   };
 });
