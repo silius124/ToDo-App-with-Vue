@@ -3,10 +3,9 @@ import { ref, watch } from "vue";
 import { useFilterArrayStore } from "../api/useFileterArrayStore";
 import { useFilterStore } from "../api/useFilterStore";
 const inpNameTodo = ref("");
-const activeOption = ref("All");
 const filteredArray = useFilterArrayStore();
 const filter = useFilterStore();
-filter.filter = activeOption.value;
+filter.filter = "All";
 
 function addToDo() {
   const trimmed = inpNameTodo.value.trim();
@@ -14,15 +13,11 @@ function addToDo() {
   const newTask = {
     id: Date.now(),
     name: inpNameTodo.value,
+    done: false,
   };
-  filteredArray.addToArrayAll(newTask);
-  filteredArray.addToArrayNotDone(newTask);
+  filteredArray.addToArrayToDo(newTask);
   inpNameTodo.value = "";
 }
-
-watch(activeOption, (newVal) => {
-  filter.setFilter(newVal);
-});
 </script>
 <template>
   <div
@@ -32,13 +27,15 @@ watch(activeOption, (newVal) => {
       class="w-full mx-5 lg:w-150 lg:mx-0 border-2 rounded-md border-purple-500 p-1 focus:border-purple-850 focus:border-3 focus:outline-0 shadow-lg"
       type="text"
       v-model="inpNameTodo"
+      placeholder="Добавить задачу..."
+      @keyup.enter="addToDo"
     />
     <div class="w-full mx-5 flex flex-row gap-3 lg:w-auto">
       <select
         class="w-32 bg-purple-500 p-2 rounded-sm text-white shadow-lg cursor-pointer focus:outline-transparent"
         name=""
         id=""
-        v-model="activeOption"
+        v-model="filter.filter"
       >
         <option class="hover:bg-purple-700">All</option>
         <option class="hover:bg-purple-700">Done</option>
