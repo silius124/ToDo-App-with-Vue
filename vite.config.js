@@ -5,6 +5,7 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/ToDo-App-with-Vue/",
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
