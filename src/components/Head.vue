@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
-import { useFilterArrayStore } from "../api/useFileterArrayStore";
-import { useFilterStore } from "../api/useFilterStore";
+import { useFilterArrayStore } from "../store/useFileterArrayStore";
+import { useFilterStore } from "../store/useFilterStore";
 const inpNameTodo = ref("");
 const filteredArray = useFilterArrayStore();
 const filter = useFilterStore();
