@@ -1,5 +1,26 @@
-# Vue 3 + Vite
+# ToDo App with Vue
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Мини-приложение ToDo, созданное на Vue 3 и оформленное с использованием TailwindCSS.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+![Гифка работы сайта](recording_todo_vue.gif)
+
+##  Основные возможности
+- Добавление задач
+- Отметка задач как выполненных
+- Удаление задач
+- Редактирование задач
+- Фильтрация
+
+##  Использованные технологии
+- Vue 3
+- Vite
+- TailwindCSS
+- Composition API
+- Pinia
+
+##  Установка и запуск
+```bash
+git clone https://github.com/silius124/ToDo-App-with-Vue.git
+cd ToDo-App-with-Vue
+npm install
+npm run dev  # или 'npm run serve'
