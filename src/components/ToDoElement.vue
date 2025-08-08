@@ -1,5 +1,5 @@
 <script setup>
-import { useFilterArrayStore } from "../api/useFileterArrayStore";
+import { useFilterArrayStore } from "../store/useFileterArrayStore";
 import { ref } from "vue";
 const todo = defineModel("todo");
 const isEdit = ref(false);

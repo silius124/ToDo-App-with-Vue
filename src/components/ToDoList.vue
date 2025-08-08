@@ -1,7 +1,7 @@
 <script setup>
 import ToDoElement from "./ToDoElement.vue";
-import { useFilterArrayStore } from "../api/useFileterArrayStore";
-import { useFilterStore } from "../api/useFilterStore";
+import { useFilterArrayStore } from "../store/useFileterArrayStore";
+import { useFilterStore } from "../store/useFilterStore";
 import { computed } from "vue";
 
 const filteredArray = useFilterArrayStore();
@@ -27,7 +27,6 @@ const choseFilteredArray = computed(() => {
         v-for="todoElement of choseFilteredArray"
         :key="todoElement.id"
         :value="todoElement.name"
-        class="max-w-100"
       >
         <ToDoElement :todo="todoElement" />
       </li>
