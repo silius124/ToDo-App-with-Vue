@@ -24,6 +24,7 @@ git clone https://github.com/silius124/ToDo-App-with-Vue.git
 cd ToDo-App-with-Vue
 npm install
 npm run dev  # или 'npm run serve'
+```
 
 
 ## Лицензия
